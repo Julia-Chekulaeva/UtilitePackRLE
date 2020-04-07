@@ -12,13 +12,15 @@ class UtiliteTest {
     @Test
     @Tag("Example")
     fun utilite() {
-        utilite("pack-rle -z -out input/resOfTask2.txt input/task2.txt")
+        utilite("pack-rle -z input/EmptyFile.txt")
+        utilite("pack-rle -u -out input/resOfEmptyFile.txt input/EmptyFile.rle")
+        utilite("pack-rle -z -out input/resOfTask2.rle input/task2.txt")
         utilite("pack-rle -z input/task2.txt")
-        utilite("pack-rle -u -out input/resOfTask2RLE.txt input/task2RLE.txt")
-        utilite("pack-rle -u input/task2RLE.txt")
-        utilite("pack-rle -z -out input/resOfSomeText.txt input/SomeText.txt")
-        utilite("pack-rle -u input/SomeTextRLE.txt")
-        utilite("pack-rle -u -out input/SomeTextFromRLE.txt input/resOfSomeText.txt")
+        utilite("pack-rle -u -out input/resOfTask2RLE.txt input/task2RLE.rle")
+        utilite("pack-rle -u input/task2RLE.rle")
+        utilite("pack-rle -z -out input/resOfSomeText.rle input/SomeText.txt")
+        utilite("pack-rle -u input/SomeTextRLE.rle")
+        utilite("pack-rle -u -out input/SomeTextFromRLE.txt input/resOfSomeText.rle")
         assertEquals(
                 File("input/task2RLE.rle").readText(), File("input/resOfTask2RLE.txt").readText()
         )

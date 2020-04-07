@@ -1,6 +1,6 @@
 package main.kotlin.PackRLE
 
-val regex = Regex("""pack-rle (-z|-u) (-out [а-яА-Я\w/]+\.txt )?[а-яА-Я\w/]+\.txt""")
+val regex = Regex("""pack-rle ((-z (-out [а-яА-Я\w/]+\.rle )?[а-яА-Я\w/]+\.txt)|(-u (-out [а-яА-Я\w/]+\.txt )?[а-яА-Я\w/]+\.rle))""")
 
 class PackRLE(str: String) {
 
@@ -13,7 +13,12 @@ class PackRLE(str: String) {
 
     val inputName: String = elems.last()
 
-    val outputName: String = if (elems.size == 5) elems[3] else elems[2].removeSuffix("txt") + "rle"
+    val outputName: String =
+            if (elems.size == 5) elems[3]
+            else {
+                if (elems[1] == "-z") elems[2].removeSuffix("txt") + "rle"
+                else elems[2].removeSuffix("rle") + "txt"
+            }
 
     val toRLE = elems[1] == "-z"
 
