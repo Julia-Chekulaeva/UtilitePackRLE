@@ -5,7 +5,8 @@ val regex = Regex("""pack-rle (-z|-u) (-out [а-яА-Я\w/]+\.txt )?[а-яА-Я\
 class PackRLE(str: String) {
 
     init {
-        if (!str.matches(regex)) throw IllegalArgumentException("Утилита введена неправильно")
+        if (!str.matches(regex))
+            throw IllegalArgumentException("Утилита введена неправильно")
     }
 
     private val elems: Array<String> = str.split(" ")
@@ -18,7 +19,6 @@ class PackRLE(str: String) {
 
     fun utilite(str: String): Unit {
         val rle = PackRLE(str.substring(str.indexOf("pack-rle ")))
-        // Need to be rewrited
         val file = File(rle.inputName).readText()
         var i = 0
         var count: Int
