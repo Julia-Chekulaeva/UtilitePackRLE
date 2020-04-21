@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="com.sun.jersey.contribs:jersey-apache-client:1.11" type="repository">
+    <properties maven-id="com.sun.jersey.contribs:jersey-apache-client:1.11" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-apache-client-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-httpclient-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-client-1.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-core-1.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-apache-client-1.11-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.0.4-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-client-1.11-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-core-1.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-apache-client-1.11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-httpclient-3.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.0.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-client-1.11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jersey-core-1.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
