@@ -7,7 +7,6 @@ import java.io.File
 
 class UtiliteTest {
 
-
     private fun utilite(s: String) {
         val args = s.split(" ").toTypedArray()
         CmdClass().myParser(args)
