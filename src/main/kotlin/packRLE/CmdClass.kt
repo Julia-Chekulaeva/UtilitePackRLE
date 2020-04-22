@@ -9,6 +9,7 @@ class CmdClass {
         options.addOption("z", false, "Converting from txt to rle")
         options.addOption("u", false, "Converting from rle to txt")
         options.addOption("out", true, "Output file")
+        options.getOption("out").argName = "outputName"
         val parser = DefaultParser()
         val cmd: CommandLine?
         try {
