@@ -1,6 +1,5 @@
-package PackRLE
+package packRLE
 
-import main.kotlin.PackRLE.PackRLE
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
@@ -8,12 +7,9 @@ import java.io.File
 
 class UtiliteTest {
 
-    // Раз уж класс паф, нужно потестить, как отсутствие входного файла обыгрывается
-    // Ок, все равно нужно постестить
-
-    /*private fun utilite(s: String) {
-        val obj = PackRLE(s.split(" "))
-        obj.utilite()
+    private fun utilite(s: String) {
+        val args = s.split(" ").toTypedArray()
+        CmdClass().myParser(args)
     }
 
     @Test
@@ -25,7 +21,7 @@ class UtiliteTest {
         utilite("pack-rle -z -out input\\resOfTask2.rle input\\task2.txt")
         utilite("pack-rle -z input\\task2.txt")
 
-        utilite("pack-rle -u -out input\\resOfTask2RLE.txt input\\task2RLE.rle")
+        utilite("pack-rle -u -out input\\resOfTask2RLE.txt input\\resOfTask2.rle")
         utilite("pack-rle -u input\\task2RLE.rle")
 
         utilite("pack-rle -z -out input\\resOfSomeText.rle input\\SomeText.txt")
@@ -62,7 +58,7 @@ class UtiliteTest {
         File("input/resOfSomeText.txt").delete()
         File("input/SomeTextRLE.txt").delete()
         File("input/SomeTextFromRLE.txt").delete()
-    }*/
+    }
 
 }
 
