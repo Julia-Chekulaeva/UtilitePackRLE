@@ -21,12 +21,10 @@ class UtiliteTest {
 
         utilite("pack-rle -z -out input\\resOfTask2.rle input\\task2.txt")
         utilite("pack-rle -z input\\task2.txt")
-
-        utilite("pack-rle -u -out input\\resOfTask2RLE.txt input\\resOfTask2.rle")
+        utilite("pack-rle -u -out input\\resOfTask2FromRLE.txt input\\resOfTask2.rle")
 
         utilite("pack-rle -z -out input\\resOfSomeText.rle input\\SomeText.txt")
         utilite("pack-rle -z input\\SomeText.txt")
-
         utilite("pack-rle -u -out input\\SomeTextFromRLE.txt input\\SomeText.rle")
 
         assertEquals(
@@ -34,6 +32,9 @@ class UtiliteTest {
         )
         assertEquals(
                 File("input\\task2.rle").readText(), File("input\\resOfTask2.rle").readText()
+        )
+        assertEquals(
+                File("input\\task2.txt").readText(), File("input\\resOfTask2FromRLE.txt").readText()
         )
         assertEquals(
                 File("input\\SomeText.rle").readText(), File("input\\resOfSomeText.rle").readText()
@@ -45,7 +46,7 @@ class UtiliteTest {
         File("input\\EmptyFile.rle").delete()
         File("input\\resOfTask2.rle").delete()
         File("input\\task2.rle").delete()
-        File("input\\resOfTask2RLE.txt").delete()
+        File("input\\resOfTask2FromRLE.txt").delete()
         File("input\\resOfSomeText.rle").delete()
         File("input\\SomeText.rle").delete()
         File("input\\SomeTextFromRLE.txt").delete()

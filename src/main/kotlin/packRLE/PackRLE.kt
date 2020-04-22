@@ -13,9 +13,21 @@ const val ZERO_FOR_USUAL = Byte.MIN_VALUE
 
 const val ZERO_FOR_REPEAT = Byte.MAX_VALUE - MAX_REPEAT_COUNT + 1
 
-val regex = Regex("""pack-rle ((-z (-out [а-яА-Я\w\\/]+\.rle )?[а-яА-Я\w\\/]+\.txt)|(-u (-out [а-яА-Я\w\\/]+\.txt )?[а-яА-Я\w\\/]+\.rle))""")
+val regexRLE = Regex("""[а-яА-Я\w\W\d_\\/]+\.rle""")
+
+val regexTXT = Regex("""[а-яА-Я\w\W\d_\\/]+\.txt""")
 
 class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String) {
+
+    init {
+        if (toRLE) {
+            if (!inputName.matches(regexTXT) || !(outputName ?: "a.rle").matches(regexRLE))
+                error("Incorrect type of file(s) or converting")
+        } else {
+            if (!inputName.matches(regexRLE) || !(outputName ?: "a.txt").matches(regexTXT))
+                error("Incorrect type of file(s) or converting")
+        }
+    }
 
     private val input: File = Paths.get(inputName).toFile()
 
@@ -27,6 +39,7 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
     fun utilite() {
         try {
             val file = input.readBytes()
+            println(file.size)
             var i = 0
             val list = mutableListOf<Byte>()
             val res = mutableListOf<Byte>()
