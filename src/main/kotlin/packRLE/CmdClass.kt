@@ -15,13 +15,16 @@ class CmdClass {
         try {
             cmd = parser.parse(options, myArgs)
         } catch (pe: ParseException) {
+            // Не очень понимаю, как это тестировать
             val formatter = HelpFormatter()
             formatter.printHelp("PackRLE", options)
             exitProcess(-1)
         }
         if (cmd != null) {
+            if (cmd.args.size != 2 || cmd.args[0] != "pack-rle")
+                throw IllegalStateException("args")
             if (cmd.hasOption("z") == cmd.hasOption("u")) {
-                error("Ошибка при разборе командной строки. Определите тип конвертации")
+                throw IllegalStateException("z or u")
             }
             val outputName = if (cmd.hasOption("out"))
                 cmd.getOptionValues("out")[0]
@@ -29,6 +32,7 @@ class CmdClass {
                 null
             PackRLE(cmd.hasOption("z"), outputName, myArgs.last()).utilite()
         } else {
+            // И здесь не понимаю, как тестировать
             error("Ошибка при разборе командной строки\n")
         }
     }
