@@ -30,7 +30,7 @@ class CmdClass {
                 cmd.getOptionValues("out")[0]
             else
                 null
-            PackRLE(cmd.hasOption("z"), outputName, myArgs.last()).utilite()
+            PackRLE(cmd.hasOption("z"), outputName, cmd.args.last()).utilite()
         } else {
             // И здесь не понимаю, как тестировать
             error("Ошибка при разборе командной строки\n")
