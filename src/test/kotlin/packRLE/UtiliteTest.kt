@@ -65,7 +65,7 @@ class UtiliteTest {
         File("input\\SomeTextFromRLE.txt").delete()
         File("input\\Vikipedia.rle").delete()
         File("input\\FromVikipedia.txt").delete()
-        //File("input\\Repeating.rle").delete()
+        File("input\\Repeating.rle").delete()
         File("input\\FromRepeating.txt").delete()
     }
 
