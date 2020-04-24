@@ -27,6 +27,9 @@ class UtiliteTest {
         utilite("pack-rle -z input\\SomeText.txt")
         utilite("pack-rle -u -out input\\SomeTextFromRLE.txt input\\SomeText.rle")
 
+        utilite("pack-rle -z input\\Vikipedia.txt")
+        utilite("pack-rle -u -out input\\FromVikipedia.txt input\\Vikipedia.rle")
+
         assertEquals(
             File("input\\EmptyFile.txt").readText(), File("input\\resOfEmptyFile.txt").readText()
         )
@@ -42,6 +45,10 @@ class UtiliteTest {
         assertEquals(
                 File("input\\SomeText.txt").readText(), File("input\\SomeTextFromRLE.txt").readText()
         )
+        assertEquals(
+            File("input\\Vikipedia.txt").readText(), File("input\\FromVikipedia.txt").readText()
+        )
+
         File("input\\resOfEmptyFile.txt").delete()
         File("input\\EmptyFile.rle").delete()
         File("input\\resOfTask2.rle").delete()
@@ -50,6 +57,8 @@ class UtiliteTest {
         File("input\\resOfSomeText.rle").delete()
         File("input\\SomeText.rle").delete()
         File("input\\SomeTextFromRLE.txt").delete()
+        File("input\\Vikipedia.rle").delete()
+        File("input\\FromVikipedia.txt").delete()
     }
 
 }

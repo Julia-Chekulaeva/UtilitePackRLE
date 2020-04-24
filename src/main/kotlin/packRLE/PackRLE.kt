@@ -39,7 +39,6 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
     fun utilite() {
         try {
             val file = input.readBytes()
-            println(file.size)
             var i = 0
             val list = mutableListOf<Byte>()
             val res = mutableListOf<Byte>()
