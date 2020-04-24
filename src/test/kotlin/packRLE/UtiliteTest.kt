@@ -37,7 +37,7 @@ class UtiliteTest {
         utilite("pack-rle -u -out input\\FromRepeating.txt input\\Repeating.rle")
 
         assertThrows<IllegalStateException> { utilite("pack-rle -z -u input\\Repeating.txt") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z -out input\\Repeating.txt") }
+        assertThrows<IllegalStateException> { utilite("pack-rle -z -out input\\Repeating.rle") }
         assertThrows<IllegalStateException> { utilite("pack-r -z input\\Repeating.txt") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z -u input\\Repeating.rle") }
