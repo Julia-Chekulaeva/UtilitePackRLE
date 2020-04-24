@@ -21,10 +21,10 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
     init {
         if (toRLE) {
             if (!inputName.matches(regexTXT) || !(outputName ?: "a.rle").matches(regexRLE))
-                error("Incorrect type of file(s) or converting")
+                error("Неправильное расширение файла(ов) или тип конвертации")
         } else {
             if (!inputName.matches(regexRLE) || !(outputName ?: "a.txt").matches(regexTXT))
-                error("Incorrect type of file(s) or converting")
+                error("Неправильное расширение файла(ов) или тип конвертации")
         }
     }
 
