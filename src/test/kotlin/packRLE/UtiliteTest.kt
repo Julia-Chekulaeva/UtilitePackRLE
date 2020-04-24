@@ -40,7 +40,7 @@ class UtiliteTest {
         assertThrows<IllegalStateException> { utilite("pack-rle -z -out input\\Repeating.rle") }
         assertThrows<IllegalStateException> { utilite("pack-r -z input\\Repeating.txt") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z -u input\\Repeating.rle") }
+        assertThrows<IllegalStateException> { utilite("pack-rle -z input\\Repeating.rle") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z -u -out input\\Repeating.txt input\\Repeating.txt") }
         assertThrows<IndexOutOfBoundsException> { utilite("pack-rle -u input\\FromVikipediaWrong.rle") }
         assertThrows<IndexOutOfBoundsException> { utilite("pack-rle -u input\\FromVikipediaWrong2.rle") }
