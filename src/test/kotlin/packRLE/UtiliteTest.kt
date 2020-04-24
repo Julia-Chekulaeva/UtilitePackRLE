@@ -30,6 +30,9 @@ class UtiliteTest {
         utilite("pack-rle -z input\\Vikipedia.txt")
         utilite("pack-rle -u -out input\\FromVikipedia.txt input\\Vikipedia.rle")
 
+        utilite("pack-rle -z input\\Repeating.txt")
+        utilite("pack-rle -u -out input\\FromRepeating.txt input\\Repeating.rle")
+
         assertEquals(
             File("input\\EmptyFile.txt").readText(), File("input\\resOfEmptyFile.txt").readText()
         )
@@ -48,6 +51,9 @@ class UtiliteTest {
         assertEquals(
             File("input\\Vikipedia.txt").readText(), File("input\\FromVikipedia.txt").readText()
         )
+        assertEquals(
+            File("input\\Repeating.txt").readText(), File("input\\FromRepeating.txt").readText()
+        )
 
         File("input\\resOfEmptyFile.txt").delete()
         File("input\\EmptyFile.rle").delete()
@@ -59,6 +65,8 @@ class UtiliteTest {
         File("input\\SomeTextFromRLE.txt").delete()
         File("input\\Vikipedia.rle").delete()
         File("input\\FromVikipedia.txt").delete()
+        //File("input\\Repeating.rle").delete()
+        File("input\\FromRepeating.txt").delete()
     }
 
 }

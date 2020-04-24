@@ -3,7 +3,6 @@ package packRLE
 import java.io.File
 import java.lang.IndexOutOfBoundsException
 import java.nio.file.Paths
-import kotlin.system.exitProcess
 
 const val MAX_REPEAT_COUNT = 32
 
@@ -11,7 +10,7 @@ const val MAX_USUAL_COUNT = Byte.MAX_VALUE - MAX_REPEAT_COUNT - Byte.MIN_VALUE
 
 const val ZERO_FOR_USUAL = Byte.MIN_VALUE
 
-const val ZERO_FOR_REPEAT = Byte.MAX_VALUE - MAX_REPEAT_COUNT + 1
+const val ZERO_FOR_REPEAT = Byte.MAX_VALUE - MAX_REPEAT_COUNT
 
 val regexRLE = Regex("""[а-яА-Я\w\W\d_\\/]+\.rle""")
 
@@ -58,14 +57,14 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
                         i++
                     }
                     if (repeatCount > 2) {
-                        // Записываем все накопившиеся
-                        list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
+                        // Записываем все накопившиеся, а если не накопилось
+                        if (usualCount > 0)
+                            list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
                         res.addAll(list + (repeatCount + ZERO_FOR_REPEAT).toByte() + file[i])
                         // Обнуляем счетчик неповторяющихся символов
                         list.clear()
                         usualCount = 0
-                    }
-                    else {
+                    } else {
                         for (k in 1..repeatCount) {
                             if (usualCount == MAX_USUAL_COUNT) {
                                 //Записываем все накопившиеся
@@ -95,7 +94,7 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
             } else {
                 try {
                     while (i < lastIndex) {
-                        if (file[i] < ZERO_FOR_REPEAT) {
+                        if (file[i] <= ZERO_FOR_REPEAT) {
                             for (j in 0 until file[i] - ZERO_FOR_USUAL) {
                                 i++
                                 res.add(file[i])
