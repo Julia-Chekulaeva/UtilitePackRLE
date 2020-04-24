@@ -42,8 +42,8 @@ class UtiliteTest {
         assertThrows<IllegalStateException> { utilite("pack-rle -z") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z input\\Repeating.rle") }
         assertThrows<IllegalStateException> { utilite("pack-rle -z -u -out input\\Repeating.txt input\\Repeating.txt") }
-        assertThrows<IndexOutOfBoundsException> { utilite("pack-rle -u input\\FromVikipediaWrong.rle") }
-        assertThrows<IndexOutOfBoundsException> { utilite("pack-rle -u input\\FromVikipediaWrong2.rle") }
+        assertThrows<IllegalStateException> { utilite("pack-rle -u input\\FromVikipediaWrong.rle") }
+        assertThrows<IllegalStateException> { utilite("pack-rle -u input\\FromVikipediaWrong2.rle") }
         assertThrows<java.io.FileNotFoundException> { utilite("pack-rle -z input\\NonExistingFile.txt") }
 
         assertEquals(

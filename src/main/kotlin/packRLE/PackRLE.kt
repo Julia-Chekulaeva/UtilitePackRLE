@@ -91,21 +91,25 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
             }
             output.writeBytes(res.toByteArray())
         } else {
-            while (i < lastIndex) {
-                if (file[i] <= ZERO_FOR_REPEAT) {
-                    for (j in 0 until file[i] - ZERO_FOR_USUAL) {
+            try {
+                while (i < lastIndex) {
+                    if (file[i] <= ZERO_FOR_REPEAT) {
+                        for (j in 0 until file[i] - ZERO_FOR_USUAL) {
+                            i++
+                            res.add(file[i])
+                        }
                         i++
-                        res.add(file[i])
+                    } else {
+                        for (j in 0 until file[i] - ZERO_FOR_REPEAT)
+                            res.add(file[i + 1])
+                        i += 2
                     }
-                    i++
-                } else {
-                    for (j in 0 until file[i] - ZERO_FOR_REPEAT)
-                        res.add(file[i + 1])
-                    i += 2
                 }
+            } catch (e: IndexOutOfBoundsException) {
+                throw IllegalStateException("index,rle")
             }
             if (i != lastIndex + 1) {
-                throw IndexOutOfBoundsException()
+                throw IllegalStateException("index,rle")
             }
             output.writeBytes(res.toByteArray())
         }
