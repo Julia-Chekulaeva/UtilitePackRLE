@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.assertThrows
 import java.io.File
 import java.lang.IllegalStateException
-import java.lang.IndexOutOfBoundsException
 
 class UtiliteTest {
 
