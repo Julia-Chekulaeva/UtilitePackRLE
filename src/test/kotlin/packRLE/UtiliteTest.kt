@@ -3,9 +3,7 @@ package packRLE
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.assertThrows
 import java.io.File
-import java.lang.IllegalStateException
 
 class UtiliteTest {
 
@@ -18,7 +16,7 @@ class UtiliteTest {
     @Tag("Example")
     fun utilite() {
 
-        utilite("pack-rle -z input\\EmptyFile.txt")
+        utilite("pack-rle -z C:\\Users\\Юлия\\IdeaProjects\\UtilitePackRLE\\input\\EmptyFile.txt")
         utilite("pack-rle -u -out input\\resOfEmptyFile.txt input\\EmptyFile.rle")
 
         utilite("pack-rle -z -out input\\resOfTask2.rle input\\task2.txt")
@@ -34,16 +32,6 @@ class UtiliteTest {
 
         utilite("pack-rle -z input\\Repeating.txt")
         utilite("pack-rle -u -out input\\FromRepeating.txt input\\Repeating.rle")
-
-        assertThrows<IllegalStateException> { utilite("pack-rle -z -u input\\Repeating.txt") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z -out input\\Repeating.rle") }
-        assertThrows<IllegalStateException> { utilite("pack-r -z input\\Repeating.txt") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z input\\Repeating.rle") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -z -u -out input\\Repeating.txt input\\Repeating.txt") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -u input\\FromVikipediaWrong.rle") }
-        assertThrows<IllegalStateException> { utilite("pack-rle -u input\\FromVikipediaWrong2.rle") }
-        assertThrows<java.io.FileNotFoundException> { utilite("pack-rle -z input\\NonExistingFile.txt") }
 
         assertEquals(
             File("input\\EmptyFile.txt").readText(), File("input\\resOfEmptyFile.txt").readText()

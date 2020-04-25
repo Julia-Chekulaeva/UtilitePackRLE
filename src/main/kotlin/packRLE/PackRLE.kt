@@ -1,6 +1,7 @@
 package packRLE
 
 import java.io.File
+import java.io.FileNotFoundException
 import java.lang.IndexOutOfBoundsException
 import java.nio.file.Paths
 
@@ -21,10 +22,10 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
     init {
         if (toRLE) {
             if (!inputName.matches(regexTXT) || !(outputName ?: "a.rle").matches(regexRLE))
-                throw IllegalStateException("расширение")
+                error("Неправильное расширение файла(ов) или тип конвертации")
         } else {
             if (!inputName.matches(regexRLE) || !(outputName ?: "a.txt").matches(regexTXT))
-                throw IllegalStateException("расширение")
+                error("Неправильное расширение файла(ов) или тип конвертации")
         }
     }
 
@@ -36,82 +37,86 @@ class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String
     ).toFile()
 
     fun utilite() {
-        val file = input.readBytes()
-        var i = 0
-        val list = mutableListOf<Byte>()
-        val res = mutableListOf<Byte>()
-        val lastIndex = file.lastIndex
-        if (toRLE) {
-            var usualCount = 0
-            var repeatCount: Int
-            while (i < lastIndex) {
-                repeatCount = 1
-                while (i < lastIndex && file[i + 1] != file[i] && usualCount < MAX_USUAL_COUNT) {
-                    list.add(file[i])
-                    usualCount++
-                    i++
-                }
-                while (i < lastIndex && file[i + 1] == file[i] && repeatCount < MAX_REPEAT_COUNT) {
-                    repeatCount++
-                    i++
-                }
-                if (repeatCount > 2) {
-                    // Записываем все накопившиеся, а если не накопилось
-                    if (usualCount > 0)
-                        list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
-                    res.addAll(list + (repeatCount + ZERO_FOR_REPEAT).toByte() + file[i])
-                    // Обнуляем счетчик неповторяющихся символов
-                    list.clear()
-                    usualCount = 0
-                } else {
-                    for (k in 1..repeatCount) {
-                        if (usualCount == MAX_USUAL_COUNT) {
-                            //Записываем все накопившиеся
-                            list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
-                            res.addAll(list)
-                            // Обнуляем счетчик неповторяющихся символов
-                            list.clear()
-                            usualCount = 0
-                        }
+        try {
+            val file = input.readBytes()
+            var i = 0
+            val list = mutableListOf<Byte>()
+            val res = mutableListOf<Byte>()
+            val lastIndex = file.lastIndex
+            if (toRLE) {
+                var usualCount = 0
+                var repeatCount: Int
+                while (i < lastIndex) {
+                    repeatCount = 1
+                    while (i < lastIndex && file[i + 1] != file[i] && usualCount < MAX_USUAL_COUNT) {
                         list.add(file[i])
                         usualCount++
-                    }
-                }
-                // Сдвигаем основной счетчик, т.к. в данный момент мы стоим на символе, который уже записали
-                i++
-            }
-            if (i == lastIndex) {
-                list.add(file[i])
-                usualCount++
-            }
-            if (usualCount > 0) {
-                //Записываем все накопившиеся
-                list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
-                res.addAll(list)
-            }
-            output.writeBytes(res.toByteArray())
-        } else {
-            try {
-                while (i < lastIndex) {
-                    if (file[i] <= ZERO_FOR_REPEAT) {
-                        for (j in 0 until file[i] - ZERO_FOR_USUAL) {
-                            i++
-                            res.add(file[i])
-                        }
                         i++
-                    } else {
-                        for (j in 0 until file[i] - ZERO_FOR_REPEAT)
-                            res.add(file[i + 1])
-                        i += 2
                     }
+                    while (i < lastIndex && file[i + 1] == file[i] && repeatCount < MAX_REPEAT_COUNT) {
+                        repeatCount++
+                        i++
+                    }
+                    if (repeatCount > 2) {
+                        // Записываем все накопившиеся, а если не накопилось
+                        if (usualCount > 0)
+                            list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
+                        res.addAll(list + (repeatCount + ZERO_FOR_REPEAT).toByte() + file[i])
+                        // Обнуляем счетчик неповторяющихся символов
+                        list.clear()
+                        usualCount = 0
+                    } else {
+                        for (k in 1..repeatCount) {
+                            if (usualCount == MAX_USUAL_COUNT) {
+                                //Записываем все накопившиеся
+                                list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
+                                res.addAll(list)
+                                // Обнуляем счетчик неповторяющихся символов
+                                list.clear()
+                                usualCount = 0
+                            }
+                            list.add(file[i])
+                            usualCount++
+                        }
+                    }
+                    // Сдвигаем основной счетчик, т.к. в данный момент мы стоим на символе, который уже записали
+                    i++
                 }
-            } catch (e: IndexOutOfBoundsException) {
-                throw IllegalStateException("index,rle")
+                if (i == lastIndex) {
+                    list.add(file[i])
+                    usualCount++
+                }
+                if (usualCount > 0) {
+                    //Записываем все накопившиеся
+                    list.add(0, (usualCount + ZERO_FOR_USUAL).toByte())
+                    res.addAll(list)
+                }
+                output.writeBytes(res.toByteArray())
+            } else {
+                try {
+                    while (i < lastIndex) {
+                        if (file[i] <= ZERO_FOR_REPEAT) {
+                            for (j in 0 until file[i] - ZERO_FOR_USUAL) {
+                                i++
+                                res.add(file[i])
+                            }
+                            i++
+                        } else {
+                            for (j in 0 until file[i] - ZERO_FOR_REPEAT)
+                                res.add(file[i + 1])
+                            i += 2
+                        }
+                    }
+                } catch (e: IndexOutOfBoundsException) {
+                    error("Некорректное содержимое rle-файла как возможная причина ошибки")
+                }
+                if (i != lastIndex + 1) {
+                    error("Некорректное содержимое rle-файла как возможная причина ошибки")
+                }
+                output.writeBytes(res.toByteArray())
             }
-            if (i != lastIndex + 1) {
-                throw IllegalStateException("index,rle")
-            }
-            output.writeBytes(res.toByteArray())
+        } catch (e: FileNotFoundException) {
+            error("Файл не найден")
         }
     }
 

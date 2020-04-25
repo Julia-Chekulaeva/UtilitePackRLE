@@ -22,9 +22,9 @@ class CmdClass {
         }
         if (cmd != null) {
             if (cmd.args.size != 2 || cmd.args[0] != "pack-rle")
-                throw IllegalStateException("args")
+                error("Неправильно введена командная строка")
             if (cmd.hasOption("z") == cmd.hasOption("u")) {
-                throw IllegalStateException("z or u")
+                error("Ошибка при разборе командной строки. Определите тип конвертации: в rle или из rle")
             }
             val outputName = if (cmd.hasOption("out"))
                 cmd.getOptionValues("out")[0]
