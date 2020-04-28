@@ -2,7 +2,6 @@ package packRLE
 
 import java.io.File
 import java.io.FileNotFoundException
-import java.lang.IndexOutOfBoundsException
 import java.nio.file.Paths
 
 const val MAX_REPEAT_COUNT = 32
