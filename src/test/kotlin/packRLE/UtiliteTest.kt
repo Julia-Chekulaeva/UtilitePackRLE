@@ -9,64 +9,64 @@ class UtiliteTest {
 
     private fun utilite(s: String) {
         val args = s.split(" ").toTypedArray()
-        CmdClass().myParser(args)
+        CmdClass.myParser(args)
     }
 
     @Test
     @Tag("Example")
     fun utilite() {
 
-        utilite("pack-rle -z C:\\Users\\Юлия\\IdeaProjects\\UtilitePackRLE\\input\\EmptyFile.txt")
-        utilite("pack-rle -u -out input\\resOfEmptyFile.txt input\\EmptyFile.rle")
+        utilite("-z src\\test\\resources\\EmptyFile.txt")
+        utilite("-u -out src\\test\\resources\\resOfEmptyFile.txt src\\test\\resources\\EmptyFile.rle")
 
-        utilite("pack-rle -z -out input\\resOfTask2.rle input\\task2.txt")
-        utilite("pack-rle -z input\\task2.txt")
-        utilite("pack-rle -u -out input\\resOfTask2FromRLE.txt input\\resOfTask2.rle")
+        utilite("-z -out src\\test\\resources\\resOfTask2.rle src\\test\\resources\\task2.txt")
+        utilite("-z src\\test\\resources\\task2.txt")
+        utilite("-u -out src\\test\\resources\\resOfTask2FromRLE.txt src\\test\\resources\\resOfTask2.rle")
 
-        utilite("pack-rle -z -out input\\resOfSomeText.rle input\\SomeText.txt")
-        utilite("pack-rle -z input\\SomeText.txt")
-        utilite("pack-rle -u -out input\\SomeTextFromRLE.txt input\\SomeText.rle")
+        utilite("-z -out src\\test\\resources\\resOfSomeText.rle src\\test\\resources\\SomeText.txt")
+        utilite("-z src\\test\\resources\\SomeText.txt")
+        utilite("-u -out src\\test\\resources\\SomeTextFromRLE.txt src\\test\\resources\\SomeText.rle")
 
-        utilite("pack-rle -z input\\Vikipedia.txt")
-        utilite("pack-rle -u -out input\\FromVikipedia.txt input\\Vikipedia.rle")
+        utilite("-z src\\test\\resources\\Vikipedia.txt")
+        utilite("-u -out src\\test\\resources\\FromVikipedia.txt src\\test\\resources\\Vikipedia.rle")
 
-        utilite("pack-rle -z input\\Repeating.txt")
-        utilite("pack-rle -u -out input\\FromRepeating.txt input\\Repeating.rle")
+        utilite("-z src\\test\\resources\\Repeating.txt")
+        utilite("-u -out src\\test\\resources\\FromRepeating.txt src\\test\\resources\\Repeating.rle")
 
         assertEquals(
-            File("input\\EmptyFile.txt").readText(), File("input\\resOfEmptyFile.txt").readText()
+            File("src\\test\\resources\\EmptyFile.txt").readText(), File("src\\test\\resources\\resOfEmptyFile.txt").readText()
         )
         assertEquals(
-                File("input\\task2.rle").readText(), File("input\\resOfTask2.rle").readText()
+                File("src\\test\\resources\\task2.rle").readText(), File("src\\test\\resources\\resOfTask2.rle").readText()
         )
         assertEquals(
-                File("input\\task2.txt").readText(), File("input\\resOfTask2FromRLE.txt").readText()
+                File("src\\test\\resources\\task2.txt").readText(), File("src\\test\\resources\\resOfTask2FromRLE.txt").readText()
         )
         assertEquals(
-                File("input\\SomeText.rle").readText(), File("input\\resOfSomeText.rle").readText()
+                File("src\\test\\resources\\SomeText.rle").readText(), File("src\\test\\resources\\resOfSomeText.rle").readText()
         )
         assertEquals(
-                File("input\\SomeText.txt").readText(), File("input\\SomeTextFromRLE.txt").readText()
+                File("src\\test\\resources\\SomeText.txt").readText(), File("src\\test\\resources\\SomeTextFromRLE.txt").readText()
         )
         assertEquals(
-            File("input\\Vikipedia.txt").readText(), File("input\\FromVikipedia.txt").readText()
+            File("src\\test\\resources\\Vikipedia.txt").readText(), File("src\\test\\resources\\FromVikipedia.txt").readText()
         )
         assertEquals(
-            File("input\\Repeating.txt").readText(), File("input\\FromRepeating.txt").readText()
+            File("src\\test\\resources\\Repeating.txt").readText(), File("src\\test\\resources\\FromRepeating.txt").readText()
         )
 
-        File("input\\resOfEmptyFile.txt").delete()
-        File("input\\EmptyFile.rle").delete()
-        File("input\\resOfTask2.rle").delete()
-        File("input\\task2.rle").delete()
-        File("input\\resOfTask2FromRLE.txt").delete()
-        File("input\\resOfSomeText.rle").delete()
-        File("input\\SomeText.rle").delete()
-        File("input\\SomeTextFromRLE.txt").delete()
-        File("input\\Vikipedia.rle").delete()
-        File("input\\FromVikipedia.txt").delete()
-        File("input\\Repeating.rle").delete()
-        File("input\\FromRepeating.txt").delete()
+        File("src\\test\\resources\\resOfEmptyFile.txt").delete()
+        File("src\\test\\resources\\EmptyFile.rle").delete()
+        File("src\\test\\resources\\resOfTask2.rle").delete()
+        File("src\\test\\resources\\task2.rle").delete()
+        File("src\\test\\resources\\resOfTask2FromRLE.txt").delete()
+        File("src\\test\\resources\\resOfSomeText.rle").delete()
+        File("src\\test\\resources\\SomeText.rle").delete()
+        File("src\\test\\resources\\SomeTextFromRLE.txt").delete()
+        File("src\\test\\resources\\Vikipedia.rle").delete()
+        File("src\\test\\resources\\FromVikipedia.txt").delete()
+        File("src\\test\\resources\\Repeating.rle").delete()
+        File("src\\test\\resources\\FromRepeating.txt").delete()
     }
 
 }
