@@ -12,9 +12,9 @@ const val ZERO_FOR_USUAL = Byte.MIN_VALUE
 
 const val ZERO_FOR_REPEAT = Byte.MAX_VALUE - MAX_REPEAT_COUNT
 
-val regexRLE = Regex("""[а-яА-Я\w\W\d_\\/]+\.rle""")
+val regexRLE = Regex("""[а-яА-Я\w\d_\\/]+\.rle""")
 
-val regexTXT = Regex("""[а-яА-Я\w\W\d_\\/]+\.txt""")
+val regexTXT = Regex("""[а-яА-Я\w\d_\\/]+\.txt""")
 
 class PackRLE(private val toRLE: Boolean, outputName: String?, inputName: String) {
 
