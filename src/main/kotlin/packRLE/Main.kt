@@ -1,5 +1,6 @@
 package packRLE
 
+import java.io.File
 import kotlin.system.exitProcess
 
 val errorMessages: List<String> = listOf(
